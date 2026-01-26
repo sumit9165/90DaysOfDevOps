@@ -15,7 +15,7 @@
 | `date` | It show time and date |
 | `mkdir` | It use for creating a directory(folder) like `mkdir Documents`. |
 | `touch` | It use for create a file like `touch hello.txt`.  |
-| `cp` | It use for copy  and paste file or directory `cp <source of file> <destination where you want to paste it>`. |
+| `cp` | It use for copy  and paste file or directory `cp <source of file> <destination where you want to paste it>/`. |
 | `mv` | It use for 1.( move file/directory{folder}) and 2. (rename file/directory{folder}). |
 | `rm` | It use for remove file/directory(folder). like `rm /Documents`. |
 | `ps` | It show the process for current shell |
