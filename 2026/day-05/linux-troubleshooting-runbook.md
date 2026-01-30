@@ -1,48 +1,141 @@
-This report provides a snapshot of the current server state, focusing on identifying performance bottlenecks.
-1. Target Service / Process 
+# Linux Troubleshooting Runbook – Day 05
 
-• Service/Process Name: [e.g., apache2, mysql, java, docker-proxy] 
-• PID: [Use  or  to find] 
-• Status: [Running/Stopped/Zombie/High Resource Usage] 
+## Target service / process
 
-2. Snapshot: CPU & Memory 
+* **Service:** `sshd` (OpenSSH Daemon) *
+* **Purpose:** Remote access to the system *
+* **Why chosen:** Critical service, always running, clear logs *
 
-• Load Average (1m, 5m, 15m): [Run ] 
-• Top CPU Consumers: [Run  or ] 
-• Memory Usage (Free/Used/Buff/Cache): [Run ] 
-• Swap Usage: [If non-zero and increasing, memory pressure is critical]  
+---
 
-3. Snapshot: Disk & IO 
+## Environment basics
 
-• Disk Space Availability: [Run  to check for 100% usage] 
-• Disk IOPS/Wait: [Run  or  to check high  or ] 
-• Inode Usage: [Run ] [13, 14, 15, 16]  
+```bash
+uname -a
+```
 
-4. Snapshot: Network 
+**Observed:** Linux kernel 5.x, x86_64. Confirms kernel version and architecture.
 
-• Network Utilization: [Run  or ] 
-• Connections: [Run  or  to check for high connection counts] 
-• Latency: [Run  or  to verify external connectivity] 
+```bash
+cat /etc/os-release
+```
 
-5. Logs Reviewed 
+**Observed:** Ubuntu 22.04 LTS. Confirms distro and release for package/log locations.
 
-• System Messages:  or  
-• Service Logs:  
-• Auth Logs:  (if security breach is suspected) [21]  
+---
 
-6. Quick findings for this Environment 
+## Filesystem sanity check
 
-• OS/Kernel: [Run  and ] 
-• Bottleneck Identified: [CPU / Memory / Disk IO / Network / Service failure] 
-• Immediate Action: [e.g., Restart service, purge logs, kill high-resource PID] 
+```bash
+mkdir /tmp/runbook-demo
+```
 
-If this worsens (next steps) 
+**Observed:** Directory created successfully — filesystem is writable.
 
-1. Deeper Diagnostics: Use  on the PID to analyze system calls. 
-2. Performance Logging: Enable  or  to capture long-term trends. 
-3. Kernel Parameters: Check  settings (e.g., max open files, memory overcommit). 
-4. Hardware Check: Verify physical disk health using  (if bare metal).
+```bash
+cp /etc/hosts /tmp/runbook-demo/hosts-copy && ls -l /tmp/runbook-demo
+```
 
+**Observed:** File copied correctly, permissions look normal. No disk or permission issues.
+
+---
+
+## Snapshot: CPU & Memory
+
+```bash
+ps -o pid,pcpu,pmem,comm -C sshd
+```
+
+**Observed:** sshd processes using <1% CPU and minimal memory. No abnormal usage.
+
+```bash
+free -h
+```
+
+**Observed:** ~60% memory available, no swap pressure. Memory not constrained.
+
+---
+
+## Snapshot: Disk & IO
+
+```bash
+df -h
+```
+
+**Observed:** Root filesystem at ~45% usage. Plenty of free disk space.
+
+```bash
+du -sh /var/log
+```
+
+**Observed:** /var/log ~250MB. Logs not consuming excessive disk.
+
+---
+
+## Snapshot: Network
+
+```bash
+ss -tulpn | grep sshd
+```
+
+**Observed:** sshd listening on port 22 (IPv4 and IPv6). Service is bound correctly.
+
+```bash
+curl -I localhost
+```
+
+**Observed:** Connection succeeds (HTTP headers returned). Network stack responsive.
+
+---
+
+## Logs reviewed
+
+```bash
+journalctl -u ssh -n 50
+```
+
+**Observed:** Normal startup messages, successful login attempts, no errors.
+
+```bash
+tail -n 50 /var/log/auth.log
+```
+
+**Observed:** Recent successful SSH logins, no failed-auth storms or warnings.
+
+---
+
+## Quick findings
+
+* sshd is healthy and responsive
+* No CPU, memory, or disk pressure
+* Network port listening as expected
+* Logs show normal operational behavior
+* No immediate remediation required
+
+---
+
+## If this worsens (next steps)
+
+1. **Restart strategy**
+
+   ```bash
+   systemctl restart ssh
+   systemctl status ssh
+   ```
+
+   Check for restart failures or dependency issues.
+
+2. **Increase log verbosity**
+
+   * Temporarily increase `LogLevel VERBOSE` in `/etc/ssh/sshd_config`
+   * Reload config and monitor logs for authentication or connection errors
+
+3. **Deep inspection**
+
+   * Attach `strace -p <pid>` if sshd is hanging
+   * Capture network traffic with `tcpdump` to identify connection issues
+
+---
 
 
 
