@@ -85,11 +85,10 @@
 -----
 
 **7. bg** command send process to background.
-* **df -h** show you output in readable format. *
 
 | Commands | Description | Example |
 | -------- | ----------- | ------- |
-| `bg` | It show you free hard disk on your linux system.| `bg` |
+| `bg` | It use to start a recently suspended job on your linux system.| `bg` |
 
 -----
 **8. fg** command use to run a stopped process in foreground.
