@@ -10,7 +10,7 @@
 
 ## Environment basics
 
-```bash
+```bash 
 uname -a
 ```
 
@@ -133,7 +133,7 @@ tail -n 50 /var/log/auth.log
 3. **Deep inspection**
 
    * Attach `strace -p <pid>` if sshd is hanging
-   * Capture network traffic with `tcpdump` to identify connection issues
+   * Capture network traffic with `tcpdump` to identify connection issues.
 
 ---
 
