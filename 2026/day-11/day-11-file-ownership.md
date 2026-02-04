@@ -1,6 +1,7 @@
 # Day 11 Challenge
-
+------
 ## Files & Directories Created
+
 | list of files and directories |
 | ----------------------------- |
 |drwxrwxr-x 2 berlin    heist-team 4096 Feb  4 09:46 app-logs |
@@ -17,9 +18,9 @@
 | -rw-rw-r-- 1 professor planners 0 Feb  4 09:48 /heist-project/plans/strategy.conf |
 | -rw-rw-r-- 1 professor planners 0 Feb  4 09:48 /heist-project/vault/gold.txt |
 
+-------
 
 ## Ownership Changes
-[before/after for each file]
 
 | Files/Directory | Before Change| After Change |
 | ----------------------------- | ----------------------------- | ----------------------------- |
@@ -38,11 +39,12 @@
 | /heist-project/plans/strategy.conf | -rw-rw-r-- 1 ubuntu ubuntu 0 Feb  4 09:48 /heist-project/plans/strategy.conf | -rw-rw-r-- 1 professor planners 0 Feb  4 09:48 /heist-project/plans/strategy.conf | 
 | /heist-project/vault/gold.txt | -rw-rw-r-- 1 ubuntu ubuntu 0 Feb  4 09:48 /heist-project/vault/gold.txt | -rw-rw-r-- 1 professor planners 0 Feb  4 09:48 /heist-project/vault/gold.txt |
 
-
+----------
 
 ## Commands Used
 
 | Commands | Usage |
+| -------- | ----- |
 | `touch heist-project/vault/gold.txt` | This command is use to create file under direcories. |
 | `sudo adduser tokyo` | This command is use to add user. |
 | `sudo chown tokyo devops-file.txt` | This command is use to change ownership of file. |
@@ -51,7 +53,10 @@
 | `mkdir -p heist-project/plans` | This command is use to create directory and prevent from error if file already exist. |
 | `sudo chown -R professor:planners heist-project/` | This command is use to change ownership and group recursively of directory or file. |
 
+--------
 ## What I Learned
 * How to change ownership and group in one command.
 * How to change ownership and group of file or directory recursively.
 * How to create files and directories recursively.
+
+----------
