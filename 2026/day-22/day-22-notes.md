@@ -310,7 +310,7 @@ Workflow:
 Working Directory → Staging Area → Repository
 
 
-![alt text](<git add commit repository.png>)
+![alt text](<git_add_commit_repository.png>)
 
 
 -----
