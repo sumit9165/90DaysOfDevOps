@@ -2,4 +2,10 @@ name: Sumit
 role: devops engineer
 expierence_years: 1
 learning: true
-  
+tools:
+  - docker
+  - git
+  - github
+  - github actions
+  - linux
+hobbies: [running, sleeping, eating]
