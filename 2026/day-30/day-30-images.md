@@ -2,14 +2,14 @@
 ---
 ## Task 1: Docker Images
 
-- Compare ubuntu vs alpine — why is one much smaller?
-Ubuntu vs Alpine (why size difference?)
-Ubuntu (~70MB): full GNU userland, glibc, package manager, more utilities
-Alpine (~7MB): minimal distro using musl libc + BusyBox
-Alpine is smaller because it strips down:
-fewer binaries
-lighter libc (musl vs glibc)
-minimal dependencies
+Compare ubuntu vs alpine — why is one much smaller?
+- Ubuntu vs Alpine (why size difference?)
+- Ubuntu (~70MB): full GNU userland, glibc, package manager, more utilities
+- Alpine (~7MB): minimal distro using musl libc + BusyBox
+- Alpine is smaller because it strips down:
+- fewer binaries
+- lighter libc (musl vs glibc)
+- minimal dependencies
 
 Tradeoff: Alpine can have compatibility issues with some software expecting glibc.
 
@@ -19,13 +19,13 @@ Tradeoff: Alpine can have compatibility issues with some software expecting glib
 
 Key fields to look at:
 
-Id → image hash
-RepoTags
-Created
-Architecture
-OS
-Layers
-Config (env vars, default command)
+- Id → image hash
+- RepoTags
+- Created
+- Architecture
+- OS
+- Layers
+- Config (env vars, default command)
 
 ----
 
@@ -35,13 +35,13 @@ Notes (conceptual answer)
 
 What are layers?
 
-Immutable filesystem diffs stacked to build an image
+- Immutable filesystem diffs stacked to build an image
 
 Why Docker uses them:
 
-Caching → faster builds
-Reusability → shared layers across images
-Efficiency → only changed layers are rebuilt/transferred
+- Caching → faster builds
+- Reusability → shared layers across images
+- Efficiency → only changed layers are rebuilt/transferred
 
 ----
 
@@ -49,10 +49,10 @@ Efficiency → only changed layers are rebuilt/transferred
 
 States you'll see:
 
-created
-running
-paused
-exited
+- created
+- running
+- paused
+- exited
 
 -----
 ## Task 4: Working with Running Containers
